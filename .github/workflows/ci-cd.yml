@@ -1,0 +1,23 @@
+name: CI/CD for HTML Page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t my-html-page .
+
+      - name: Deploy to production
+        run: |
+          docker stop my-html-page || true
+          docker rm my-html-page || true
+          docker run -d --name my-html-page -p 80:80 my-html-page
