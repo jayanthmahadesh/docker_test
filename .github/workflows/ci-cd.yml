@@ -18,7 +18,7 @@ jobs:
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
-          eb deploy <your-environment-name> --region <your-region>
+          eb deploy Testdocker-env --region us-east-1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
