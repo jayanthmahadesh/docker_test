@@ -16,8 +16,9 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-html-page .
 
-      - name: Deploy to production
+      - name: Deploy to AWS Elastic Beanstalk
         run: |
-          docker stop my-html-page || true
-          docker rm my-html-page || true
-          docker run -d --name my-html-page -p 80:80 my-html-page
+          eb deploy <your-environment-name> --region <your-region>
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
